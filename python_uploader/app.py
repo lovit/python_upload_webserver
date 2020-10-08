@@ -37,7 +37,8 @@ def listdir(root):
 
     rows = [ROW_FORMAT.format('DIR', name, ' - ') for name in dirnames]
     rows += [ROW_FORMAT.format('FILE', name, get_humanize_size(name)) for name in filenames]
-    return '\n'.join(rows)
+    table = '<table>{}</table>'.format('\n'.join(rows))
+    return table
 
 
 @app.route("/", methods=['GET', 'POST'])
