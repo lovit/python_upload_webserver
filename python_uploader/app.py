@@ -31,7 +31,7 @@ def listdir(root):
             return f"{int(s / 1048576)} Mb"
         return f"{int(s / 1073741824)} Gb"
 
-    ROW_FORMAT = "<tr>{}</tr>".format(''.join(["<th>{}</th>"] * 3))
+    ROW_FORMAT = '<tr><td>{}</td><td style="text-align:left">{}</td><td>{}</td></tr>'
     filenames = sorted([name for name in os.listdir(root) if os.path.isfile(f'{root}/{name}')])
     dirnames = sorted([name for name in os.listdir(root) if os.path.isdir(f'{root}/{name}')])
 
