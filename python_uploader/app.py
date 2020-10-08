@@ -18,8 +18,8 @@ def index():
             return redirect(url_for('index'))
     return """
     <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
+    <title>Upload a file</title>
+    <h1>Upload a file</h1>
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file>
          <input type=submit value=Upload>
@@ -36,8 +36,11 @@ def main():
     parser.add_argument('--upload_folder', default='/tmp/', help='Default save folder')
 
     args = parser.parse_args()
-    UPLOAD_FOLDER = args.upload_folder
+    UPLOAD_FOLDER = os.path.abspath(args.upload_folder)
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    print(f'Upload destination : {UPLOAD_FOLDER}')
 
     if args.debug:
         app.run(host=args.host, port=args.port, debug=True)
