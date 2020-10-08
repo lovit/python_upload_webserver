@@ -28,7 +28,7 @@ def index():
     """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],))
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='MT-Eval flask app ')
     parser.add_argument('--host', type=str, default='0.0.0.0', help='Default is localhost')
     parser.add_argument('--port', type=int, default=5000, help='Default is :5000')
@@ -43,3 +43,6 @@ if __name__ == "__main__":
         app.run(host=args.host, port=args.port, debug=True)
     else:
         serve(app, port=args.port)
+
+if __name__ == "__main__":
+    main()
