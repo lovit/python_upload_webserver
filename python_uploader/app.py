@@ -71,7 +71,7 @@ def main():
     if args.debug:
         app.run(host=args.host, port=args.port, debug=True)
     else:
-        serve(app, port=args.port)
+        serve(app, host=args.host, port=args.port)
 
 if __name__ == "__main__":
     main()
