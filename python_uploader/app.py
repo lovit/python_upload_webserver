@@ -55,18 +55,21 @@ def index():
 
 
 def main():
-    parser = argparse.ArgumentParser(description='MT-Eval flask app ')
+    parser = argparse.ArgumentParser(description='File uploader app ')
     parser.add_argument('--host', type=str, default='0.0.0.0', help='Default is localhost')
     parser.add_argument('--port', type=int, default=5000, help='Default is :5000')
     parser.add_argument('--debug', dest='debug', action='store_true', help='Debug Flask app')
-    parser.add_argument('--upload_folder', default='/tmp/', help='Default save folder')
+    parser.add_argument('--max_size', type=int, default=1024, help='MB')
+    parser.add_argument('--upload_folder', default='./', help='Default save folder')
 
     args = parser.parse_args()
     UPLOAD_FOLDER = os.path.abspath(args.upload_folder)
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config['MAX_CONTENT_LENGTH'] = args.max_size * 1024 * 1024
     print(f'Upload destination : {UPLOAD_FOLDER}')
+    print(f'Maximum size       : {args.max_size} MB')
 
     if args.debug:
         app.run(host=args.host, port=args.port, debug=True)
