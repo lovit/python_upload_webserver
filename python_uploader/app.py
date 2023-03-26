@@ -57,10 +57,10 @@ def index():
 def main():
     parser = argparse.ArgumentParser(description='File uploader app ')
     parser.add_argument('--host', type=str, default='0.0.0.0', help='Default is localhost')
-    parser.add_argument('--port', type=int, default=5000, help='Default is :5000')
+    parser.add_argument('--port', type=int, default=5000, help='(default %(default)s)')
     parser.add_argument('--debug', dest='debug', action='store_true', help='Debug Flask app')
-    parser.add_argument('--max_size', type=int, default=1024, help='MB')
-    parser.add_argument('--upload_folder', default='./', help='Default save folder')
+    parser.add_argument('--max_size', type=int, default=1024, help='MB (default %(default)s)')
+    parser.add_argument('--upload_folder', default='./', help='Default save folder (default %(default)s)')
 
     args = parser.parse_args()
     UPLOAD_FOLDER = os.path.abspath(args.upload_folder)
